@@ -70,15 +70,13 @@ dependencies {
     }
     compile("org.springframework.boot:spring-boot-starter-log4j"){
     	 exclude group:"ch.qos.logback"
-    	 }
+    }
     	 
     // TODO turn security on /off
     	 
    compile("org.springframework.boot:spring-boot-starter-security") {
     exclude group:"ch.qos.logback"
     }
-    
-  
   
     
     // Misc Dependencies
@@ -97,7 +95,6 @@ dependencies {
    compile 'com.google.code.gson:gson:2.3.1'
    
      
-   compile 'javax.mail:mail:1.4.7'
    compile 'commons-validator:commons-validator:1.4.1'
    
   

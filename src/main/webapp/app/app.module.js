@@ -2,10 +2,6 @@
 (function() {
 	var app = angular.module('tilofy', [ 'ngRoute', 'ui.bootstrap' ]);
 
-
-
-	
-
 	/**
 	 * PhotoController
 	 */
@@ -13,14 +9,10 @@
 
 		$http.get('/queue').success(function(datax) {
 			console.log(' queue success result  ===== '+ JSON.stringify(datax));
-
 			$scope.jobs =datax.result;
-
-
 		});
 				
-
-		} ]);
+	} ]);
 
 	app.controller('PhotoController', function($scope, $http) {
 	 
@@ -29,72 +21,57 @@
 	    $scope.formErrors = null;
 	    $scope.imageWidth = 200;
 	    $scope.imageHeight = 300;
-	      $scope.submit = function() {
-	    	  
+	    $scope.submit = function() {	    	  
 	  	    $scope.formErrors = null;
-
-
-				if ($scope.imageWidth == undefined) {
-					
-					console.log('no imageWidth');
-
+	
+			if ($scope.imageWidth == undefined) {			
+				console.log('no imageWidth');
+				$scope.formErrors = [];
+				$scope.formErrors.push ('width not set');
+			}
+			if ($scope.imageHeight == undefined) {
+				if ($scope.formErrors == undefined){
 					$scope.formErrors = [];
-					$scope.formErrors.push ('width not set');
 				}
-				if ($scope.imageHeight == undefined) {
-					if ($scope.formErrors == undefined){
-						$scope.formErrors = [];
-					}
-					$scope.formErrors.push ('height not set');
+				$scope.formErrors.push ('height not set');
+			}
+			if ($scope.imageUrl == undefined) {
+				if ($scope.formErrors == undefined){
+					$scope.formErrors = [];
 				}
-				if ($scope.imageUrl == undefined) {
-					if ($scope.formErrors == undefined){
-						$scope.formErrors = [];
-					}
-					$scope.formErrors.push ('URL not set');
-				}
-				
-				if ($scope.formErrors == undefined) {
-					console.log(' jpobs  ===== '+ JSON.stringify($scope.jobs));
-
-					$http({
-						  method: 'POST',
-						  url: '/queue',
-						  params: {url: $scope.imageUrl, size: ''+ $scope.imageWidth +'x'+$scope.imageHeight}
-						  
-						}).then(function successCallback(data) {
+				$scope.formErrors.push ('URL not set');
+			}
+			
+			if ($scope.formErrors == undefined) {
+				console.log(' jpobs  ===== '+ JSON.stringify($scope.jobs));
 	
-							console.log(' successCallback result  ===== '+ JSON.stringify(data));
-							if ( data.data.success ) {
-								console.log('  vsuccess ');
-								
-								console.log(' datajobs  result jobs ===== '+ JSON.stringify(data.data.jobs.result));
-								$scope.jobs =data.data.jobs.result;
-
-//								console.log(' xxxxxxNOPW GET QUEUE......');
-//								$http.get('/queue').success(function(datax) {
-//									console.log(' successCallback result  ===== '+ JSON.stringify(datax));
-//
-//									$scope.jobs =datax.result;
-//						
-//						
-//								});
-								
-							} else {
-								$scope.formErrors =data.data.errors;
-								console.log('  formErrors ' + data.data.errors);
+				$http({
+					  method: 'POST',
+					  url: '/queue',
+					  params: {url: $scope.imageUrl, size: ''+ $scope.imageWidth +'x'+$scope.imageHeight}
+					  
+					}).then(function successCallback(data) {
 	
-							}
+						console.log(' successCallback result  ===== '+ JSON.stringify(data));
+						if ( data.data.success ) {
+							console.log('  vsuccess ');
 							
+							console.log(' datajobs  result jobs ===== '+ JSON.stringify(data.data.jobs.result));
+							$scope.jobs =data.data.jobs.result;
 	
-						  }, function errorCallback(data) {
-								console.log('TODO- errorCallback response' + JSON.stringify(data));
+						} else {
+							$scope.formErrors =data.data.errors;
+							console.log('  formErrors ' + data.data.errors);
 	
-						    // or server returns response with an error status.
+						}
+						
+	
+					  }, function errorCallback(data) {
+							console.log('TODO- errorCallback response' + JSON.stringify(data));
 						  });
 				}
-			
-	      };
+				
+		      };
 	});
 
 })();
