@@ -4,28 +4,15 @@
 
 
 
-
-	app.config(function($routeProvider) {
-		$routeProvider
-	
-		.when('/guest', {
-			templateUrl : 'views/guest.html'
-		})
 	
 
-
-	});
-
-	
-//
-//	/**
-//	 * PhotoController
-//	 */
+	/**
+	 * PhotoController
+	 */
 	app.controller('BodyController', [ '$log', '$scope','$http',function($log,  $scope,  $http) {
 
-		console.log(' NOPW GET QUEUE......');
 		$http.get('/queue').success(function(datax) {
-			console.log(' successCallback result  ===== '+ JSON.stringify(datax));
+			console.log(' queue success result  ===== '+ JSON.stringify(datax));
 
 			$scope.jobs =datax.result;
 
@@ -37,7 +24,6 @@
 
 	app.controller('PhotoController', function($scope, $http) {
 	 
-	    
 		$scope.imageUrl= 'https://scontent.cdninstagram.com/hphotos-xpa1/t51.2885-15/s640x640/sh0.08/e35/12256894_720156524782163_1349930470_n.jpg';
 	    $scope.list = [];
 	    $scope.formErrors = null;
@@ -47,11 +33,6 @@
 	    	  
 	  	    $scope.formErrors = null;
 
-	    	  
-				console.log('result post ===== imageUrl =  '+ $scope.imageUrl);
-				console.log('result ===== imageWidth =  '+ $scope.imageWidth);
-
-				console.log('result ===== imageHeight =  '+ $scope.imageHeight);
 
 				if ($scope.imageWidth == undefined) {
 					
@@ -74,26 +55,30 @@
 				}
 				
 				if ($scope.formErrors == undefined) {
-		
+					console.log(' jpobs  ===== '+ JSON.stringify($scope.jobs));
+
 					$http({
 						  method: 'POST',
 						  url: '/queue',
 						  params: {url: $scope.imageUrl, size: ''+ $scope.imageWidth +'x'+$scope.imageHeight}
 						  
 						}).then(function successCallback(data) {
-							console.log('resuccessCallback=  '+ $scope.imageUrl);
 	
 							console.log(' successCallback result  ===== '+ JSON.stringify(data));
 							if ( data.data.success ) {
 								console.log('  vsuccess ');
-								console.log(' NOPW GET QUEUE......');
-								$http.get('/queue').success(function(datax) {
-									console.log(' successCallback result  ===== '+ JSON.stringify(datax));
+								
+								console.log(' datajobs  result jobs ===== '+ JSON.stringify(data.data.jobs.result));
+								$scope.jobs =data.data.jobs.result;
 
-									$scope.jobs =datax.result;
-						
-						
-								});
+//								console.log(' xxxxxxNOPW GET QUEUE......');
+//								$http.get('/queue').success(function(datax) {
+//									console.log(' successCallback result  ===== '+ JSON.stringify(datax));
+//
+//									$scope.jobs =datax.result;
+//						
+//						
+//								});
 								
 							} else {
 								$scope.formErrors =data.data.errors;
@@ -108,18 +93,8 @@
 						    // or server returns response with an error status.
 						  });
 				}
-				
-
-				
-
-		
+			
 	      };
 	});
-
-	
-	
-	
-	
-	
 
 })();

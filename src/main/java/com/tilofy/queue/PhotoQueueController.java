@@ -124,6 +124,7 @@ public class PhotoQueueController  implements Serializable{
 			// Simply return the message id with the q request
 			
 			response = request;
+			response.put("jobs",readQueueAll());
 
 		}else {
 			response.put("errors", errors);

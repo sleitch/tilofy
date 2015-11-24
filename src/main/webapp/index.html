@@ -40,7 +40,6 @@ table {
    <h2>Tilofy - Proof of Concept</h2>
    <br/>
 
-TODO jobs: {{jobs}}
    <div id="container">
 
       <div ng-controller="PhotoController"  class="form-group">
@@ -75,13 +74,8 @@ TODO jobs: {{jobs}}
 
                </div>
             </div>
-
-         </form>
-       
-      </div>
-
-
-      <table style="padding:10px">
+        
+<table style="padding:10px">
          <tr>
             <th>id</th>
             <th>URL</th>
@@ -99,6 +93,12 @@ TODO jobs: {{jobs}}
             <td>  <a href = "resized/{{job.imageName}}">resized/{{job.imageName}}</a>   </td>
          </tr>
       </table>
+         </form>
+       
+      </div>
+
+
+      
 
       <div ng-view></div>
 
