@@ -26,8 +26,8 @@ Run in Eclipse IDE
 
 Otherwise you can just import the gradle project into eclipse and run as...
 
-1. RIght click on projecyt and project and run on tomcat server. 
-2. Right click on TilofyApplication.java and run as application
+1. Right click on project  and run on tomcat server. 
+2. ...or right click on TilofyApplication.java and run as application
 
 
 Test The App With Angular Page
