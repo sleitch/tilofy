@@ -24,6 +24,16 @@ Otherwise you can just import the gradle project into eclipse and run as...
 2. Right click on TilofyApplication.java and run as application
 
 
+Test The App With Angular Page
+-
+
+1. Goto http://localhost:8080/index.html for a proof pof concept test page.
+
+Test The App with JUnit
+-
+
+1. Run the ApplicationTest.java test cases.
+
 Configuration
 -
 
