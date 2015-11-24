@@ -2,11 +2,17 @@
 Tilofy - Test App
 -
 
+*NB: Only thing you MUST change is the  path to saved images (see below)*
 
+ *(TODO: I should change that property to be system user.home , then you wouldn't even have to change that).*
+ 
+ 
 Build the App
 -
 1. cd to project root directory
-2. Run command: gradle clean build
+2. Open file: */Tilofy/src/main/resources/application.properties* 
+3. Change: *resized.images.dir=D:\\tilofy_images* to point to your resized image location.
+4. Run command: gradle clean build
 
 Run the App Command line
 -
