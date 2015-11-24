@@ -96,7 +96,14 @@ public class PhotoQueueController  implements Serializable{
 	}
 
 
-	
+	/**
+	 * POST photo url to queue
+	 * 
+	 * @param url
+	 * @param size
+	 * @return status and list of jobs
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/queue", method = RequestMethod.POST, produces = "application/json")
 	public  Map<String, Object> queue( @RequestParam(value = "url", required = false) String url,  @RequestParam(value = "size", required = false) String size) throws Exception {
 
@@ -114,7 +121,7 @@ public class PhotoQueueController  implements Serializable{
 			
 			//
 			// ..then all good. 			
-		//	request.put("id", UUID.randomUUID().toString());
+			//	request.put("id", UUID.randomUUID().toString());
 			request.put("id", ""+jobId++ );
 
 			
