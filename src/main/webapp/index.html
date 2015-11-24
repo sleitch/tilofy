@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app="tilofy">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Tilofy - Proof of Concept</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js" type="text/javascript"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<!-- Custom Fonts -->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="app/app.module.js"></script>
+
+<style>
+td, th{ 
+    padding: 10px;
+}
+For "cellspacing", you can apply the border-spacing CSS property to your table. E.g. for 10px of "cellspacing":
+
+table { 
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+</style>
+</head>
+
+
+<body ng-controller="BodyController as bodyCtrl"  style="padding:30px;">
+
+
+  
+   <h2>Tilofy - Proof of Concept</h2>
+   <br/>
+
+   <div id="container">
+
+      <div ng-controller="PhotoController"  class="form-group">
+
+         <form novalidate>
+            <div ng-show="formErrors" class="alert alert-danger">
+               <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+               <ul>
+                  <li ng-repeat="error in formErrors">{{error}}</li>
+               </ul>
+            </div>
+            <div class="row">
+               <div class="col-sm-6">
+                  Image Url:<br> <input id="myimaghe" type="text" size="80" ng-model="imageUrl"><br>
+
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-sm-2 ">
+                  Image Width:<br> <input id="wid" type="text" size="5" ng-model="imageWidth"><br>
+               </div>
+               <div class="col-sm-2 ">
+                  Image Height:<br> <input id="hei" type="text" size="5" ng-model="imageHeight"><br>
+
+               </div>
+            </div>
+            <br />
+            <div class="row">
+               <div class="col-sm-12 ">
+                  <button ng-click="submit()">submit</button>
+
+               </div>
+            </div>
+
+         </form>
+       
+      </div>
+
+
+      <table style="padding:10px">
+         <tr>
+            <th>id</th>
+            <th>URL</th>
+            <th>Status</th>
+             <th>Expire Date</th>
+             <th>Resized Image</th>
+             
+         </tr>
+         <tr ng-repeat="job in jobs">
+
+            <td>{{job.id}}</td>
+            <td >  <a href = "{{job.url}}">{{job.imageName}}  </a>   </td>
+            <td >{{job.status}}</td>
+            <td>{{job.expireDate | date:'MM/dd/yyyy @ h:mma'}}</td>
+            <td>  <a href = "resized/{{job.imageName}}">resized/{{job.imageName}}</a>   </td>
+         </tr>
+      </table>
+
+      <div ng-view></div>
+
+
+   </div>
+
+</body>
+</html>

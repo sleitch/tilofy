@@ -1,0 +1,162 @@
+// -------
+// PLUGINS 
+// -------
+
+apply plugin: "java"
+apply plugin: "eclipse-wtp"
+apply plugin: "idea"
+apply plugin: "spring-boot" 
+apply plugin: "war"
+apply plugin: "org.hidetake.ssh"
+
+// ------------
+// BASIC CONFIG
+// ------------
+
+buildscript {
+    ext {
+        springBootVersion = "1.2.5.RELEASE"
+        
+    }
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/groups/public"}
+    }
+    dependencies {
+        classpath("org.hidetake:gradle-ssh-plugin:0.4.5")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")         
+          
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+configurations {
+    providedRuntime
+}
+
+
+springBoot {
+    mainClass = "com.tilofy.TilofyApplication"
+}
+
+// ------------
+// DEPENDENCIES
+// ------------
+
+dependencies {
+
+	// Messaging
+	
+    compile("org.springframework.boot:spring-boot-starter-amqp"){
+        exclude group:"ch.qos.logback"
+    }
+	
+	
+    // Spring Dependencies
+  
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude group:"ch.qos.logback"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jdbc") {
+        exclude group:"ch.qos.logback"
+    }
+    compile("org.springframework.boot:spring-boot-starter-log4j"){
+    	 exclude group:"ch.qos.logback"
+    	 }
+    	 
+    // TODO turn security on /off
+    	 
+   compile("org.springframework.boot:spring-boot-starter-security") {
+    exclude group:"ch.qos.logback"
+    }
+    
+  
+  
+    
+    // Misc Dependencies
+    compile("org.apache.commons:commons-lang3:3.3.2")
+    compile("com.google.guava:guava:12.0")
+    
+    // Runtime Dependencies
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    providedCompile("javax.servlet:javax.servlet-api:3.1.0")
+    
+    // Test Dependencies
+    testCompile("org.springframework.boot:spring-boot-starter-test"){
+        exclude group:"ch.qos.logback"
+    }
+  
+   compile 'com.google.code.gson:gson:2.3.1'
+   
+     
+   compile 'javax.mail:mail:1.4.7'
+   compile 'commons-validator:commons-validator:1.4.1'
+   
+  
+    
+}
+
+// -------------
+// UTILITY TASKS
+// -------------
+
+eclipse {
+    classpath {
+        containers.remove("org.eclipse.jdt.launching.JRE_CONTAINER")
+        containers "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "2.1"
+}
+
+// ---------
+// APP TASKS
+// ---------
+
+war {
+    baseName = "Service_Search"
+    version = project.version
+}
+
+war.doLast { 
+  ant.unzip(src: war.archivePath, dest: "$buildDir/exploded") 
+}
+
+bootRun {
+    if (project.hasProperty("jvmArgs")) {
+        jvmArgs project.jvmArgs.split("\\s+")
+    }
+}
+
+task testDebug(type: Test) {
+    jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=8000"
+}
+
+ //
+ // Include or exclude junit test cases
+ 
+test {
+   // include 'org/foo/**'
+   exclude 'com/**'
+}
+
+// --------------------
+// DEPLOY CONFIGURATION
+// --------------------
+
+
+
+
+build.shouldRunAfter clean

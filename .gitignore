@@ -1,0 +1,13 @@
+# Backend
+bin/
+build/
+.gradle
+rebel.xml
+
+# IDE / OS generated files
+.classpath
+.settings
+.project
+.idea
+.DS_Store
+.tern-project
