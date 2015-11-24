@@ -126,7 +126,7 @@ task wrapper(type: Wrapper) {
 // ---------
 
 war {
-    baseName = "Service_Search"
+    baseName = "Tilofy_Test"
     version = project.version
 }
 

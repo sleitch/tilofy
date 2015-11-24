@@ -39,11 +39,12 @@ public class TilofyApplication {
 	private String queue;
 
 
-	
+	@Value("${rabbitmq.host}")
+	private String queueHost;
 	@Bean
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory =
-            new CachingConnectionFactory("52.11.120.38");
+            new CachingConnectionFactory(queueHost);
         return connectionFactory;
     }
 

@@ -86,7 +86,14 @@
 							console.log(' successCallback result  ===== '+ JSON.stringify(data));
 							if ( data.data.success ) {
 								console.log('  vsuccess ');
-								
+								console.log(' NOPW GET QUEUE......');
+								$http.get('/queue').success(function(datax) {
+									console.log(' successCallback result  ===== '+ JSON.stringify(datax));
+
+									$scope.jobs =datax.result;
+						
+						
+								});
 								
 							} else {
 								$scope.formErrors =data.data.errors;
@@ -104,14 +111,7 @@
 				
 
 				
-//				console.log(' NOPW GET QUEUE......');
-//				$http.get('/queue').success(function(datax) {
-//					console.log(' successCallback result  ===== '+ JSON.stringify(datax));
-//
-//					$scope.jobs =datax.result;
-//		
-//		
-//				});
+
 		
 	      };
 	});
