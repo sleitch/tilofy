@@ -8,7 +8,7 @@ Build the App
 1. cd to project root directory
 2. Run command: gradle clean build
 
-Build the App
+Run the App Command line
 -
 1. cd to lib directory e.g. Tilofy\build\libs
 2. java -jar Tilofy_Test-0.0.1-SNAPSHOT.war
