@@ -202,4 +202,73 @@ public class ApplicationTests {
 		logger.info("Time taken: {} ms, {} secs",took, TimeUnit.SECONDS.convert(took, TimeUnit.NANOSECONDS ) );
 		
 	}
+	
+	@Test
+	public void testNonRepeat() {		
+        String str ="stress";
+
+		  HashMap<Character,Integer>  characterhashtable= 
+                  new HashMap<Character ,Integer>();
+     int i,length ;
+     Character c ;
+     length= str.length();  // Scan string and build hash table
+     for (i=0;i < length;i++)
+     {
+         c=str.charAt(i);
+         if(characterhashtable.containsKey(c))
+         {
+             // increment count corresponding to c
+             characterhashtable.put(  c ,  characterhashtable.get(c) +1 );
+         }
+         else
+         {
+             characterhashtable.put( c , 1 ) ;
+         }
+     }
+     // Search characterhashtable in in order of string str
+     
+     for (i =0 ; i < length ; i++ )
+     {
+         c= str.charAt(i);
+         if( characterhashtable.get(c)  == 1 )
+        	 logger.info("C ===: {}",c);
+     }
+		
+		   
+		 
+	
+	}
+	
+	public static boolean containsSum(int[] a, int sum){
+        HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+
+        for (int i= 0; i< a.length; i++) {
+            map.put(sum - a[i], true);
+        }
+
+        for (int i = 0; i < a.length; i++) {
+            if (map.containsKey(a[i]) && map.get(a[i])) {
+                System.out.println("("+(sum-a[i])+","+a[i]+")");
+                return true;
+
+            }
+        }
+
+        return false;
+    }
+	@Test
+	public void testSum() {		
+		int[] test1 = {1,3,-10,4,2};
+
+		logger.info("Contains 6 in {} , result: {}", test1,containsSum(test1, 6));
+		logger.info("Contains 21 in {} , result: {}", test1,containsSum(test1, 21));
+		int[] test2 = {-10,1,2,3,4};
+
+		logger.info("Contains 6 in {} , result: {}", test2,containsSum(test2, 6));
+		logger.info("Contains 21 in {} , result: {}", test2,containsSum(test2, 21));
+
+	}
+	
 }
+	
+	
