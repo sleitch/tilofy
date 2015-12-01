@@ -4,16 +4,6 @@ Tilofy - Test App
 
 *NB: Only thing you MUST change is the  path to saved images (see below)*
 
-*NB: Intellij - you might have to "update" the dependencies if you see this message:*
-
-The following repositories used in your gradle projects were not indexed yet:
-            http://repo1.maven.org/maven2
-            If you want to use dependency completion for these repositories artifacts,
-            Open Repositories List, select required repositories and press "Update" button
-
-
-
-
 
 Configure Temp file Directory
 -
