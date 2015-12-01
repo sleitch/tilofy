@@ -7,7 +7,6 @@ apply plugin: "eclipse-wtp"
 apply plugin: "idea"
 apply plugin: "spring-boot" 
 apply plugin: "war"
-apply plugin: "org.hidetake.ssh"
 
 // ------------
 // BASIC CONFIG
@@ -21,11 +20,9 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
-        maven { url "https://oss.sonatype.org/content/groups/public"}
     }
     dependencies {
-        classpath("org.hidetake:gradle-ssh-plugin:0.4.5")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")         
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
           
     }
 }
@@ -84,8 +81,11 @@ dependencies {
     compile("com.google.guava:guava:12.0")
     
     // Runtime Dependencies
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
-    providedCompile("javax.servlet:javax.servlet-api:3.1.0")
+    compile("org.springframework.boot:spring-boot-starter-tomcat")
+   compile("javax.servlet:javax.servlet-api:3.1.0")
+
+ //   providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+//    providedCompile("javax.servlet:javax.servlet-api:3.1.0")
     
     // Test Dependencies
     testCompile("org.springframework.boot:spring-boot-starter-test"){
