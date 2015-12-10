@@ -1,4 +1,6 @@
 
+NOTE: No longer active - (You can still run if you use your own rabbitMQ & change rabbitmq.host=your_host)
+
 Tilofy - Test App
 -
 
